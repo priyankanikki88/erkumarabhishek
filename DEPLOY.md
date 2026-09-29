@@ -1,6 +1,34 @@
-# Deployment — Hostinger (www.erkumarabhishek.com)
+# Deployment — Hostinger (erkumarabhishek.com)
 
 Node.js backend + MySQL, React frontend built as static files. No PHP used.
+
+## Current live status
+
+Deployed via Hostinger's Git-based Node.js build, tracking branch
+`claude/portfolio-cms-ai-chatbot-wlgq6o` of `priyankanikki88/erkumarabhishek`.
+
+- Website: `erkumarabhishek.com` (Node.js app, SSL active, HTTPS redirect on)
+- Database: `u432542807_portfolio_app` (fresh dedicated DB — the account's
+  older `u432542807_crmdb` belongs to an unrelated existing app on
+  `crm.erkumarabhishek.com` and was left untouched)
+- Build settings in hPanel → Websites → erkumarabhishek.com → Node.js:
+  root directory `backend`, entry file `src/server.js`, build command `build`
+  (which itself runs `cd ../frontend && npm install && npm run build && cd
+  ../backend && rm -rf public && cp -r ../frontend/dist public`)
+- `backend/src/utils/autoMigrate.js` runs migrations and seeds the first
+  superadmin automatically on every boot — no manual `npm run migrate`/`seed`
+  needed after a redeploy
+- A push to that branch on GitHub triggers a new Hostinger build automatically
+  (Git auto-deploy)
+
+### Still open
+- **WhatsApp number** is still the placeholder `91XXXXXXXXXX` — update the
+  `WHATSAPP_NUMBER` env var in hPanel and rebuild the frontend (also set
+  `VITE_WHATSAPP_NUMBER` at build time) once you share the real number.
+- **AI chatbot** has no `OPENAI_API_KEY` set yet, so it currently shows the
+  "not fully set up" fallback message to visitors.
+- The original WordPress site on this domain was deleted (by you, in hPanel)
+  before this deploy — there is no automated backup of it from this process.
 
 ## Prerequisites on Hostinger
 1. hPanel plan with **Node.js App** support (Business/Cloud/VPS). Shared "Premium" plans without Node.js cannot run the backend.
