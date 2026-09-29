@@ -4,6 +4,7 @@ const rateLimit = require('express-rate-limit');
 const pool = require('../config/db');
 const { authenticate, authorize } = require('../middleware/auth');
 const { logAudit } = require('../middleware/audit');
+const { notify } = require('../utils/notify');
 
 const router = express.Router();
 
@@ -38,6 +39,8 @@ router.post(
       'INSERT INTO leads (name, phone, email, requirement, source, consent) VALUES (?, ?, ?, ?, ?, 1)',
       [name, phone || null, email, message, 'contact_form']
     );
+
+    await notify('new_message', 'New contact message', `${name}: ${message.slice(0, 100)}`, '/admin/messages');
 
     res.status(201).json({ ok: true, id: result.insertId });
   }

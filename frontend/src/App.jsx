@@ -2,6 +2,8 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
+import ChatWidget from './components/ChatWidget';
+import useAnalytics from './hooks/useAnalytics';
 import Home from './pages/Home';
 import Products from './pages/Products';
 import Contact from './pages/Contact';
@@ -16,7 +18,12 @@ import ProductManager from './admin/ProductManager';
 import ProductEditor from './admin/ProductEditor';
 import MediaLibrary from './admin/MediaLibrary';
 import LeadsManager from './admin/LeadsManager';
+import LeadDetail from './admin/LeadDetail';
 import MessagesManager from './admin/MessagesManager';
+import AnalyticsDashboard from './admin/AnalyticsDashboard';
+import ChatbotSettings from './admin/ChatbotSettings';
+import Conversations from './admin/Conversations';
+import AuditLog from './admin/AuditLog';
 import ProtectedRoute from './admin/ProtectedRoute';
 
 function PublicLayout({ children }) {
@@ -26,11 +33,13 @@ function PublicLayout({ children }) {
       <main style={{ minHeight: '70vh' }}>{children}</main>
       <Footer />
       <WhatsAppButton />
+      <ChatWidget />
     </>
   );
 }
 
 export default function App() {
+  useAnalytics();
   return (
     <Routes>
       {/* Public site */}
@@ -62,7 +71,12 @@ export default function App() {
         <Route path="products/:id" element={<ProductEditor />} />
         <Route path="media" element={<MediaLibrary />} />
         <Route path="leads" element={<LeadsManager />} />
+        <Route path="leads/:id" element={<LeadDetail />} />
         <Route path="messages" element={<MessagesManager />} />
+        <Route path="analytics" element={<AnalyticsDashboard />} />
+        <Route path="chatbot" element={<ChatbotSettings />} />
+        <Route path="conversations" element={<Conversations />} />
+        <Route path="audit" element={<AuditLog />} />
       </Route>
 
       <Route path="*" element={<Navigate to="/" />} />

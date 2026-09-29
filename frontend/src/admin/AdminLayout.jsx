@@ -1,5 +1,6 @@
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import NotificationBell from './NotificationBell';
 
 const links = [
   ['/admin', 'Dashboard', true],
@@ -7,7 +8,11 @@ const links = [
   ['/admin/products', 'Products'],
   ['/admin/media', 'Media Library'],
   ['/admin/leads', 'Leads (CRM)'],
-  ['/admin/messages', 'Messages']
+  ['/admin/messages', 'Messages'],
+  ['/admin/analytics', 'Analytics'],
+  ['/admin/chatbot', 'AI Chatbot Settings'],
+  ['/admin/conversations', 'AI Conversations'],
+  ['/admin/audit', 'Audit Log']
 ];
 
 export default function AdminLayout() {
@@ -30,7 +35,10 @@ export default function AdminLayout() {
       <main className="admin-main">
         <div className="admin-topbar">
           <div>Signed in as <strong>{user?.name}</strong> ({user?.role})</div>
-          <button className="btn btn-outline" onClick={handleLogout}>Logout</button>
+          <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
+            <NotificationBell />
+            <button className="btn btn-outline" onClick={handleLogout}>Logout</button>
+          </div>
         </div>
         <Outlet />
       </main>

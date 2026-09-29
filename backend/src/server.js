@@ -14,6 +14,10 @@ const productRoutes = require('./routes/products');
 const contactRoutes = require('./routes/contact');
 const leadRoutes = require('./routes/leads');
 const dashboardRoutes = require('./routes/dashboard');
+const analyticsRoutes = require('./routes/analytics');
+const chatbotRoutes = require('./routes/chatbot');
+const notificationRoutes = require('./routes/notifications');
+const auditRoutes = require('./routes/audit');
 
 const app = express();
 
@@ -42,6 +46,10 @@ app.use('/api/products', productRoutes);
 app.use('/api/contact', contactRoutes);
 app.use('/api/leads', leadRoutes);
 app.use('/api/dashboard', dashboardRoutes);
+app.use('/api/analytics', analyticsRoutes);
+app.use('/api/chatbot', chatbotRoutes);
+app.use('/api/notifications', notificationRoutes);
+app.use('/api/audit', auditRoutes);
 
 app.use((req, res) => res.status(404).json({ error: 'Route not found' }));
 
