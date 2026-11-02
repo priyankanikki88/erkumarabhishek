@@ -1,19 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-});
-
-const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
-  variable: "--font-space-grotesk",
-  display: "swap",
-  weight: ["500", "600", "700"],
-});
 
 const siteUrl = "https://www.kromadigitalmedia.com";
 
@@ -63,11 +49,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html
-      lang="en"
-      data-scroll-behavior="smooth"
-      className={`${inter.variable} ${spaceGrotesk.variable}`}
-    >
+    <html lang="en" data-scroll-behavior="smooth">
       <body className="min-h-screen bg-background font-sans text-foreground antialiased">
         <div className="noise-overlay" />
         {children}
