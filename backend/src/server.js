@@ -19,6 +19,7 @@ const analyticsRoutes = require('./routes/analytics');
 const chatbotRoutes = require('./routes/chatbot');
 const notificationRoutes = require('./routes/notifications');
 const auditRoutes = require('./routes/audit');
+const socialRoutes = require('./routes/social');
 const { autoMigrate } = require('./utils/autoMigrate');
 
 const app = express();
@@ -66,6 +67,7 @@ app.use('/api/analytics', analyticsRoutes);
 app.use('/api/chatbot', chatbotRoutes);
 app.use('/api/notifications', notificationRoutes);
 app.use('/api/audit', auditRoutes);
+app.use('/api/social', socialRoutes);
 
 app.use('/api', (req, res) => res.status(404).json({ error: 'Route not found' }));
 

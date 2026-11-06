@@ -47,6 +47,15 @@ Tested end-to-end against a live MySQL instance: auth, content CRUD + publish + 
 
 Tested end-to-end against a live MySQL instance: analytics tracking + summary aggregation, chatbot message flow (fallback path, since no OpenAI key is configured in this environment) + lead capture + conversation history, lead activities/funnel, notifications, chatbot settings update, CSV export.
 
+## Phase 3 — implemented
+- Social Publisher: connect Facebook Page, linked Instagram Business account, and a YouTube channel via OAuth; compose one post (caption + photo/video from the Media Library) and publish it to all connected platforms at once
+- Reels/Shorts are a post type (Photo/Video/Reel), not a separate platform — targets Facebook & Instagram Reels endpoints, uploads a plain video to YouTube
+- Per-platform publish status (success/failed + link or error) per post, with retry for failed platforms only
+- Access/refresh tokens stored encrypted at rest (AES-256-GCM); YouTube access tokens auto-refresh
+- See `SOCIAL_PUBLISHING.md` for the Facebook/Instagram app + Google Cloud/YouTube setup this depends on (requires Meta App Review and a verified Google OAuth consent screen for public, non-tester use)
+
+**Not yet tested against the real APIs in this environment** — no Facebook/Google app credentials were available here (`FACEBOOK_APP_ID/SECRET`, `GOOGLE_CLIENT_ID/SECRET`, `SOCIAL_TOKEN_SECRET`). Add them to `backend/.env`, run through the OAuth connect flow for each platform, and publish a real test post before relying on this in production.
+
 ## Known follow-ups
 - `npm audit` flags moderate issues in `react-quill`'s bundled Quill (XSS in rich text rendering) and `react-router-dom` v6 (open-redirect edge case) — both only reachable via trusted admin input in this app, but worth upgrading in a later pass.
 - AI replies are untested against the real OpenAI API in this environment because no `OPENAI_API_KEY` was provided — the fallback path (chatbot disabled/unconfigured messaging) was verified instead. Add a real key to `backend/.env` and retest the `/api/chatbot/message` endpoint before relying on it in production.

@@ -7,6 +7,7 @@ const links = [
   ['/admin/content', 'Content'],
   ['/admin/products', 'Products'],
   ['/admin/media', 'Media Library'],
+  ['/admin/social', 'Social Publisher'],
   ['/admin/leads', 'Leads (CRM)'],
   ['/admin/messages', 'Messages'],
   ['/admin/analytics', 'Analytics'],
