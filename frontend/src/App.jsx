@@ -24,6 +24,7 @@ import AnalyticsDashboard from './admin/AnalyticsDashboard';
 import ChatbotSettings from './admin/ChatbotSettings';
 import Conversations from './admin/Conversations';
 import AuditLog from './admin/AuditLog';
+import SocialPublisher from './admin/SocialPublisher';
 import ProtectedRoute from './admin/ProtectedRoute';
 
 function PublicLayout({ children }) {
@@ -77,6 +78,7 @@ export default function App() {
         <Route path="chatbot" element={<ChatbotSettings />} />
         <Route path="conversations" element={<Conversations />} />
         <Route path="audit" element={<AuditLog />} />
+        <Route path="social" element={<SocialPublisher />} />
       </Route>
 
       <Route path="*" element={<Navigate to="/" />} />
